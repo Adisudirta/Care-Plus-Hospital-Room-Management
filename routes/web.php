@@ -57,7 +57,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get(
 		'antrian',
 		function () {
-			return view('laravel-examples/antrian');
+			return view('antrian');
 		}
 	)->name('antrian');
 

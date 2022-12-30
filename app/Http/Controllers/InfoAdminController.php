@@ -13,7 +13,7 @@ class InfoAdminController extends Controller
 
     public function create()
     {
-        return view('laravel-examples/admin-profile');
+        return view('admin-profile');
     }
 
     public function store(Request $request)
