@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\InfoUserController;
+use App\Http\Controllers\InfoAdminController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ResetController;
 use App\Http\Controllers\SessionsController;
@@ -55,18 +55,18 @@ Route::group(['middleware' => 'auth'], function () {
 	)->name('rtl');
 
 	Route::get(
-		'user-management',
+		'antrian',
 		function () {
-			return view('laravel-examples/user-management');
+			return view('laravel-examples/antrian');
 		}
-	)->name('user-management');
+	)->name('antrian');
 
 	Route::get(
-		'tables',
+		'kamar',
 		function () {
-			return view('tables');
+			return view('kamar');
 		}
-	)->name('tables');
+	)->name('kamar');
 
 	Route::get(
 		'virtual-reality',
@@ -91,9 +91,9 @@ Route::group(['middleware' => 'auth'], function () {
 
 	Route::get('/logout', [SessionsController::class, 'destroy']);
 
-	Route::get('/user-profile', [InfoUserController::class, 'create']);
+	Route::get('/admin-profile', [InfoAdminController::class, 'create']);
 
-	Route::post('/user-profile', [InfoUserController::class, 'store']);
+	Route::post('/admin-profile', [InfoAdminController::class, 'store']);
 
 	Route::get(
 		'/login',
@@ -111,11 +111,12 @@ Route::group(['middleware' => 'guest'], function () {
 
 	Route::get('/login', [SessionsController::class, 'create']);
 	Route::post('/session', [SessionsController::class, 'store']);
+
 	Route::get('/login/forgot-password', [ResetController::class, 'create']);
 	Route::post('/forgot-password', [ResetController::class, 'sendEmail']);
+
 	Route::get('/reset-password/{token}', [ResetController::class, 'resetPass'])->name('password.reset');
 	Route::post('/reset-password', [ChangePasswordController::class, 'changePassword'])->name('password.update');
-
 });
 
 Route::get('/login', function () {

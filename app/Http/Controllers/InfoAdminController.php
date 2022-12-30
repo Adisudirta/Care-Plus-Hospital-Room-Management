@@ -8,12 +8,12 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\View;
 
-class InfoUserController extends Controller
+class InfoAdminController extends Controller
 {
 
     public function create()
     {
-        return view('laravel-examples/user-profile');
+        return view('laravel-examples/admin-profile');
     }
 
     public function store(Request $request)
