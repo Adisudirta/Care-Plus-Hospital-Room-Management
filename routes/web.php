@@ -57,9 +57,24 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get(
 		'antrian',
 		function () {
-			return view('antrian');
+			return view('pasien/antrian');
 		}
 	)->name('antrian');
+
+	Route::get(
+		'tambah-pasien',
+		function () {
+			return view('pasien/tambah-pasien');
+		}
+	)->name('tambah-pasien');
+
+	Route::get(
+		'detail-pasien',
+		function () {
+			return view('pasien/detail-pasien');
+		}
+	)->name('detail-pasien');
+
 
 	Route::get(
 		'kamar',
