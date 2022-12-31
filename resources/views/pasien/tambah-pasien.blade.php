@@ -9,7 +9,7 @@
                 <h6 class="mb-0">Informasi Pasien</h6>
             </div>
             <div class="card-body pt-4 p-3">
-                <form action="/admin-profile" method="POST" role="form text-left">
+                <form action="/tambah-pasien" method="POST" role="form text-left">
                     @csrf
 
                     @if($errors->any())
@@ -83,12 +83,12 @@
 
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="no-rek-medis" class="form-control-label">{{ __('No Rek Medis') }}</label>
+                                <label for="noRekMedis" class="form-control-label">{{ __('No Rek Medis') }}</label>
 
-                                <div class="@error('no-rek-medis') border border-danger rounded-3 @enderror">
-                                    <input class="form-control" type="text" placeholder="Ex: 123ZYB444XXXX" id="no-rek-medis" name="no-rek-medis">
+                                <div class="@error('noRekMedis') border border-danger rounded-3 @enderror">
+                                    <input class="form-control" type="text" placeholder="Ex: 123ZYB444XXXX" id="no-rek-medis" name="noRekMedis">
 
-                                    @error('no-rek-medis')
+                                    @error('noRekMedis')
                                     <p class="text-danger text-xs mt-2">{{ $message }}</p>
                                     @enderror
                                 </div>
@@ -102,7 +102,7 @@
                                 <label for="pembayaran" class="form-control-label">{{ __('Pembayaran') }}</label>
 
                                 <div class="@error('pembayaran') border border-danger rounded-3 @enderror">
-                                    <select class="form-select">
+                                    <select class="form-select" name="pembayaran">
                                         <option value="BPJS">BPJS</option>
                                         <option value="Asuransi">Asuransi</option>
                                         <option value="Umum">Umum</option>

@@ -6,6 +6,7 @@ use App\Http\Controllers\InfoAdminController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ResetController;
 use App\Http\Controllers\SessionsController;
+use App\Http\Controllers\PatientController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Route;
@@ -61,19 +62,10 @@ Route::group(['middleware' => 'auth'], function () {
 		}
 	)->name('antrian');
 
-	Route::get(
-		'tambah-pasien',
-		function () {
-			return view('pasien/tambah-pasien');
-		}
-	)->name('tambah-pasien');
+	Route::get('/tambah-pasien', [PatientController::class, 'createAddPage']);
+	Route::post('/tambah-pasien', [PatientController::class, 'addPatient']);
 
-	Route::get(
-		'detail-pasien',
-		function () {
-			return view('pasien/detail-pasien');
-		}
-	)->name('detail-pasien');
+	Route::get('/detail-pasien', [PatientController::class, 'createDetailPage']);
 
 
 	Route::get(
