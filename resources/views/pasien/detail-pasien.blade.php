@@ -12,18 +12,18 @@
             <div class="row gx-4">
                 <div class="col-auto">
                     <div class="avatar avatar-xl position-relative">
-                        <img src="../assets/img/patient-default-profile.png" alt="{{ auth()->user()->name }}" class="w-100 border-radius-lg shadow-sm">
+                        <img src="../assets/img/patient-default-profile.png" alt="{{ $patient->nama }}" class="w-100 border-radius-lg shadow-sm">
                     </div>
                 </div>
 
                 <div class="col-auto my-auto">
                     <div class="h-100">
                         <h5 class="mb-1">
-                            {{ auth()->user()->name }}
+                            {{ $patient->nama }}
                         </h5>
 
                         <p class="mb-0 font-weight-bold text-sm">
-                            {{ auth()->user()->email }}
+                            NIK: {{ $patient->nik }}
                         </p>
                     </div>
                 </div>
@@ -37,7 +37,7 @@
                 <h6 class="mb-0">Informasi Pasien</h6>
             </div>
             <div class="card-body pt-4 p-3">
-                <form action="/admin-profile" method="POST" role="form text-left">
+                <form action="/antrian/{{ $patient->id }}" method="POST" role="form text-left">
                     @csrf
 
                     @if($errors->any())
@@ -70,7 +70,7 @@
                                 <label for="namaPasien" class="form-control-label">{{ __('Nama Pasien') }}</label>
 
                                 <div class="@error('namaPasien')border border-danger rounded-3 @enderror">
-                                    <input class="form-control" type="text" placeholder="Ex: John Doe" id="namaPasien" name="namaPasien" />
+                                    <input class="form-control" type="text" placeholder="Ex: John Doe" id="namaPasien" name="namaPasien" value="{{ $patient->nama }}" />
 
                                     @error('namaPasien')
                                     <p class="text-danger text-xs mt-2">{{ $message }}</p>
@@ -84,7 +84,7 @@
                                 <label for="nik" class="form-control-label">{{ __('NIK') }}</label>
 
                                 <div class="@error('nik')border border-danger rounded-3 @enderror">
-                                    <input class="form-control" type="text" placeholder="Ex: 2171XXXXXXXXXX" id="nik" name="nik">
+                                    <input class="form-control" type="text" placeholder="Ex: 2171XXXXXXXXXX" id="nik" name="nik" value="{{ $patient->nik }}">
 
                                     @error('nik')
                                     <p class="text-danger text-xs mt-2">{{ $message }}</p>
@@ -100,7 +100,7 @@
                                 <label for="dokter" class="form-control-label">{{ __('Dokter') }}</label>
 
                                 <div class="@error('dokter')border border-danger rounded-3 @enderror">
-                                    <input class="form-control" type="text" placeholder="Ex: Dr.Jane Doe" id="dokter" name="dokter">
+                                    <input class="form-control" type="text" placeholder="Ex: Dr.Jane Doe" id="dokter" name="dokter" value="{{ $patient->dokter }}">
 
                                     @error('dokter')
                                     <p class="text-danger text-xs mt-2">{{ $message }}</p>
@@ -111,12 +111,12 @@
 
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="no-rek-medis" class="form-control-label">{{ __('No Rek Medis') }}</label>
+                                <label for="noRekMedis" class="form-control-label">{{ __('No Rek Medis') }}</label>
 
-                                <div class="@error('no-rek-medis') border border-danger rounded-3 @enderror">
-                                    <input class="form-control" type="text" placeholder="Ex: 123ZYB444XXXX" id="no-rek-medis" name="no-rek-medis">
+                                <div class="@error('noRekMedis') border border-danger rounded-3 @enderror">
+                                    <input class="form-control" type="text" placeholder="Ex: 123ZYB444XXXX" id="noRekMedis" name="noRekMedis" value="{{ $patient->noRekMedis }}">
 
-                                    @error('no-rek-medis')
+                                    @error('noRekMedis')
                                     <p class="text-danger text-xs mt-2">{{ $message }}</p>
                                     @enderror
                                 </div>
@@ -130,10 +130,25 @@
                                 <label for="pembayaran" class="form-control-label">{{ __('Pembayaran') }}</label>
 
                                 <div class="@error('pembayaran') border border-danger rounded-3 @enderror">
-                                    <select class="form-select">
-                                        <option value="BPJS">BPJS</option>
-                                        <option value="Asuransi">Asuransi</option>
-                                        <option value="Umum">Umum</option>
+                                    <select class="form-select" name="pembayaran">
+                                        <option @if($patient->pembayaran === 'BPJS')
+                                            selected
+                                            @endif
+                                            value="BPJS">
+                                            BPJS
+                                        </option>
+                                        <option @if($patient->pembayaran === 'Asuransi')
+                                            selected
+                                            @endif
+                                            value="Asuransi">
+                                            Asuransi
+                                        </option>
+                                        <option @if($patient->pembayaran === 'Umum')
+                                            selected
+                                            @endif
+                                            value="Umum">
+                                            Umum
+                                        </option>
                                     </select>
 
                                     @error('pembayaran')
@@ -148,7 +163,7 @@
                                 <label for="durasi" class="form-control-label">{{ __('Durasi') }}</label>
 
                                 <div class="@error('durasi') border border-danger rounded-3 @enderror">
-                                    <input class="form-control" type="number" placeholder="Dalam satuan hari" id="durasi" name="durasi">
+                                    <input class="form-control" type="number" placeholder="Dalam satuan hari" id="durasi" name="durasi" value="{{ $patient->durasi }}">
 
                                     @error('durasi')
                                     <p class="text-danger text-xs mt-2">{{ $message }}</p>

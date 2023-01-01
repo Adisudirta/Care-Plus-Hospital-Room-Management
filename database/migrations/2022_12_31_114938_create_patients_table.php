@@ -18,7 +18,7 @@ return new class extends Migration {
             $table->string('nik');
             $table->string('dokter');
             $table->string('noRekMedis');
-            $table->enum('pembayaran', ['bpjs', 'asuransi', 'umum']);
+            $table->enum('pembayaran', ['BPJS', 'Asuransi', 'Umum']);
             $table->integer('durasi');
             $table->timestamps();
         });

@@ -12,6 +12,30 @@
         </div>
     </div>
 
+    @if($errors->any())
+    <div class="mt-3  alert alert-primary alert-dismissible fade show" role="alert">
+        <span class="alert-text text-white">
+            {{$errors->first()}}
+        </span>
+
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+            <i class="fa fa-close" aria-hidden="true"></i>
+        </button>
+    </div>
+    @endif
+
+    @if(session('success'))
+    <div class="m-3  alert alert-success alert-dismissible fade show" id="alert-success" role="alert">
+        <span class="alert-text text-white">
+            {{ session('success') }}
+        </span>
+
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+            <i class="fa fa-close" aria-hidden="true"></i>
+        </button>
+    </div>
+    @endif
+
     <div class="row">
         <div class="col-12">
             <div class="card mb-4 mx-4" style="min-height: 500px;">
@@ -51,33 +75,55 @@
                             </thead>
 
                             <tbody>
+                                @isset($patients)
+                                @foreach($patients as $patient)
                                 <tr>
                                     <td class="ps-4">
-                                        <p class="text-center text-xs font-weight-bold mb-0">1</p>
+                                        <p class="text-center text-xs font-weight-bold mb-0">{{ $loop->index + 1 }}</p>
                                     </td>
                                     <td>
-                                        <p class="text-xs font-weight-bold mb-0">Romiza Zildjian</p>
+                                        <p class="text-xs font-weight-bold mb-0">{{ $patient->nama }}</p>
                                     </td>
                                     <td class="text-center text-uppercase">
-                                        <p class="text-xs font-weight-bold mb-0">01234Y23ZZZ</p>
+                                        <p class="text-xs font-weight-bold mb-0">{{ $patient->noRekMedis }}</p>
                                     </td>
                                     <td class="text-center">
-                                        <p class="text-xs font-weight-bold mb-0">7 Hari</p>
+                                        <p class="text-xs font-weight-bold mb-0">{{ $patient->durasi }} Hari</p>
                                     </td>
                                     <td class="text-center">
                                         <span class="text-secondary text-xs font-weight-bold">
-                                            <span class="badge badge-sm bg-gradient-success">BPJS</span>
+                                            @if($patient->pembayaran === 'BPJS')
+                                            <span class="badge badge-sm bg-gradient-success">
+                                                {{ $patient->pembayaran }}
+                                            </span>
+                                            @elseif($patient->pembayaran === 'Asuransi')
+                                            <span class="badge badge-sm bg-gradient-warning">
+                                                {{ $patient->pembayaran }}
+                                            </span>
+                                            @else
+                                            <span class="badge badge-sm bg-gradient-info">
+                                                {{ $patient->pembayaran }}
+                                            </span>
+                                            @endif
                                         </span>
                                     </td>
                                     <td class="text-center">
-                                        <a href="{{ url("detail-pasien") }}" class="mx-3" data-bs-toggle="tooltip" data-bs-original-title="Edit dan lihat detail pasien">
+                                        <a href="/antrian/{{  $patient->id }}" class="mx-3" data-bs-toggle="tooltip" data-bs-original-title="Edit dan lihat detail pasien">
                                             <i class="fas fa-user-edit text-secondary"></i>
                                         </a>
-                                        <span data-bs-toggle="tooltip" data-bs-original-title="Hapus pasien">
-                                            <i class="cursor-pointer fas fa-trash text-secondary"></i>
-                                        </span>
+
+                                        <form action="/antrian/{{ $patient->id }}" method="POST" class="d-inline">
+                                            @method('delete')
+                                            @csrf
+
+                                            <button type="submit" data-bs-toggle="tooltip" data-bs-original-title="Hapus pasien" class="border-0 bg-transparent">
+                                                <i class="cursor-pointer fas fa-trash text-secondary"></i>    
+                                            </button>
+                                        </form>                        
                                     </td>
                                 </tr>
+                                @endforeach
+                                @endisset
                             </tbody>
                         </table>
                     </div>

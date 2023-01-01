@@ -55,17 +55,14 @@ Route::group(['middleware' => 'auth'], function () {
 		}
 	)->name('rtl');
 
-	Route::get(
-		'antrian',
-		function () {
-			return view('pasien/antrian');
-		}
-	)->name('antrian');
+	Route::get('/antrian', [PatientController::class, 'index']);
+	Route::delete('/antrian/{patient:id}', [PatientController::class, 'destroy']);
 
 	Route::get('/tambah-pasien', [PatientController::class, 'createAddPage']);
 	Route::post('/tambah-pasien', [PatientController::class, 'addPatient']);
 
-	Route::get('/detail-pasien', [PatientController::class, 'createDetailPage']);
+	Route::get('/antrian/{patient:id}', [PatientController::class, 'createDetailPage']);
+	Route::post('/antrian/{patient:id}', [PatientController::class, 'edit']);
 
 
 	Route::get(
