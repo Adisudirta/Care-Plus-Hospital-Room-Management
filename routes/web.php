@@ -41,20 +41,6 @@ Route::group(['middleware' => 'auth'], function () {
 		}
 	)->name('billing');
 
-	Route::get(
-		'profile',
-		function () {
-			return view('profile');
-		}
-	)->name('profile');
-
-	Route::get(
-		'rtl',
-		function () {
-			return view('rtl');
-		}
-	)->name('rtl');
-
 	Route::get('/antrian', [PatientController::class, 'index']);
 	Route::delete('/antrian/{patient:id}', [PatientController::class, 'destroy']);
 
@@ -71,27 +57,6 @@ Route::group(['middleware' => 'auth'], function () {
 			return view('kamar');
 		}
 	)->name('kamar');
-
-	Route::get(
-		'virtual-reality',
-		function () {
-			return view('virtual-reality');
-		}
-	)->name('virtual-reality');
-
-	Route::get(
-		'static-sign-in',
-		function () {
-			return view('static-sign-in');
-		}
-	)->name('sign-in');
-
-	Route::get(
-		'static-sign-up',
-		function () {
-			return view('static-sign-up');
-		}
-	)->name('sign-up');
 
 	Route::get('/logout', [SessionsController::class, 'destroy']);
 

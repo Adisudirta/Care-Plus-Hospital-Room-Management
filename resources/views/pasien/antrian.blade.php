@@ -4,11 +4,22 @@
 
 <div>
     <div class="alert alert-secondary mx-4" role="alert">
-        <div class="w-25 ms-md-3 pe-md-3 d-flex align-items-center">
-            <div class="input-group">
-                <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
-                <input type="text" class="form-control" placeholder="Cari pasien berdasarkan nama">
-            </div>
+        <div class="ms-md-3 pe-md-3 d-flex align-items-center">
+            <form action="/antrian">
+                <div class="input-group">
+                    <select class="form-select" name="pembayaran" style="padding-right: 40px;" name="filter">
+                        <option selected value="All">Semua</option>
+                        <option value="BPJS">BPJS</option>
+                        <option value="Asuransi">Asuransi</option>
+                        <option value="Umum">Umum</option>
+                    </select>
+
+                    <button class="btn btn-info mb-0" type="submit">
+                        <i class="fas fa-filter" aria-hidden="true"></i>
+                        Filter
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 
