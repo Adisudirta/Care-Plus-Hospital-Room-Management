@@ -42,7 +42,7 @@
                                 <label for="namaPasien" class="form-control-label">{{ __('Nama Pasien') }}</label>
 
                                 <div class="@error('namaPasien')border border-danger rounded-3 @enderror">
-                                    <input class="form-control" type="text" placeholder="Ex: John Doe" id="namaPasien" name="namaPasien" />
+                                    <input class="form-control" type="text" placeholder="Ex: John Doe" id="namaPasien" name="namaPasien" value="{{ old('namaPasien') }}" >
 
                                     @error('namaPasien')
                                     <p class="text-danger text-xs mt-2">{{ $message }}</p>
@@ -56,7 +56,7 @@
                                 <label for="nik" class="form-control-label">{{ __('NIK') }}</label>
 
                                 <div class="@error('nik')border border-danger rounded-3 @enderror">
-                                    <input class="form-control" type="text" placeholder="Ex: 2171XXXXXXXXXX" id="nik" name="nik">
+                                    <input class="form-control" type="text" placeholder="Ex: 2171XXXXXXXXXX" id="nik" name="nik" value={{ old('nik') }} >
 
                                     @error('nik')
                                     <p class="text-danger text-xs mt-2">{{ $message }}</p>
@@ -72,7 +72,7 @@
                                 <label for="dokter" class="form-control-label">{{ __('Dokter') }}</label>
 
                                 <div class="@error('dokter')border border-danger rounded-3 @enderror">
-                                    <input class="form-control" type="text" placeholder="Ex: Dr.Jane Doe" id="dokter" name="dokter">
+                                    <input class="form-control" type="text" placeholder="Ex: Dr.Jane Doe" id="dokter" name="dokter" value="{{ old('dokter') }}">
 
                                     @error('dokter')
                                     <p class="text-danger text-xs mt-2">{{ $message }}</p>
@@ -86,7 +86,7 @@
                                 <label for="noRekMedis" class="form-control-label">{{ __('No Rek Medis') }}</label>
 
                                 <div class="@error('noRekMedis') border border-danger rounded-3 @enderror">
-                                    <input class="form-control" type="text" placeholder="Ex: 123ZYB444XXXX" id="no-rek-medis" name="noRekMedis">
+                                    <input class="form-control" type="text" placeholder="Ex: 123ZYB444XXXX" id="noRekMedis" name="noRekMedis" value="{{ old('noRekMedis') }}" >
 
                                     @error('noRekMedis')
                                     <p class="text-danger text-xs mt-2">{{ $message }}</p>
@@ -120,7 +120,7 @@
                                 <label for="durasi" class="form-control-label">{{ __('Durasi') }}</label>
 
                                 <div class="@error('durasi') border border-danger rounded-3 @enderror">
-                                    <input class="form-control" type="number" placeholder="Dalam satuan hari" id="durasi" name="durasi">
+                                    <input class="form-control" type="number" placeholder="Dalam satuan hari" id="durasi" name="durasi" value="{{ old('durasi') }}">
 
                                     @error('durasi')
                                     <p class="text-danger text-xs mt-2">{{ $message }}</p>

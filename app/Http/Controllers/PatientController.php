@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Patient;
+use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 
 class PatientController extends Controller
@@ -41,9 +42,9 @@ class PatientController extends Controller
     {
         $attributes = request()->validate([
             'namaPasien' => ['required', 'max:50'],
-            'nik' => ['required', 'max:50'],
+            'nik' => ['required', 'max:50', Rule::unique('patients', 'nik')],
             'dokter' => ['required', 'max:50'],
-            'noRekMedis' => ['required', 'max:50'],
+            'noRekMedis' => ['required', 'max:50', Rule::unique('patients', 'noRekMedis')],
             'pembayaran' => ['required'],
             'durasi' => ['required'],
         ]);
@@ -64,9 +65,9 @@ class PatientController extends Controller
     {
         $attributes = request()->validate([
             'namaPasien' => ['required', 'max:50'],
-            'nik' => ['required', 'max:50'],
+            'nik' => ['required', 'max:50', Rule::unique('patients', 'nik')],
             'dokter' => ['required', 'max:50'],
-            'noRekMedis' => ['required', 'max:50'],
+            'noRekMedis' => ['required', 'max:50', Rule::unique('patients', 'noRekMedis')],
             'pembayaran' => ['required'],
             'durasi' => ['required'],
         ]);
