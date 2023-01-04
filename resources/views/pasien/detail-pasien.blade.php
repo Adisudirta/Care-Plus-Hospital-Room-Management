@@ -131,19 +131,19 @@
 
                                 <div class="@error('pembayaran') border border-danger rounded-3 @enderror">
                                     <select class="form-select" name="pembayaran">
-                                        <option @if($patient->pembayaran === 'BPJS')
+                                        <option @if($patient->pembayaran === 'bpjs')
                                             selected
                                             @endif
                                             value="BPJS">
                                             BPJS
                                         </option>
-                                        <option @if($patient->pembayaran === 'Asuransi')
+                                        <option @if($patient->pembayaran === 'asuransi')
                                             selected
                                             @endif
                                             value="Asuransi">
                                             Asuransi
                                         </option>
-                                        <option @if($patient->pembayaran === 'Umum')
+                                        <option @if($patient->pembayaran === 'umum')
                                             selected
                                             @endif
                                             value="Umum">

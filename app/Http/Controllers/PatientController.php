@@ -18,7 +18,35 @@ class PatientController extends Controller
             'durasi',
         ]);
 
-        return view('pasien/antrian', ['patients' => $patients]);
+        return view('pasien/antrian', ['selected' => 'semua', 'patients' => $patients]);
+    }
+
+    public function filter(Request $request)
+    {
+
+        if ($request->filter === 'semua') {
+            $selected = 'semua';
+            $patients = Patient::all([
+                'id',
+                'nama',
+                'noRekMedis',
+                'pembayaran',
+                'durasi',
+            ]);
+
+        } else if ($request->filter === 'bpjs') {
+            $selected = 'bpjs';
+            $patients = Patient::where('pembayaran', $request->filter)->get();
+
+        } else if ($request->filter === 'umum') {
+            $selected = 'umum';
+            $patients = Patient::where('pembayaran', $request->filter)->get();
+        } else {
+            $selected = 'asuransi';
+            $patients = Patient::where('pembayaran', $request->filter)->get();
+        }
+
+        return view('pasien/antrian', ['selected' => $selected, 'patients' => $patients]);
     }
 
 
@@ -42,9 +70,9 @@ class PatientController extends Controller
     {
         $attributes = request()->validate([
             'namaPasien' => ['required', 'max:50'],
-            'nik' => ['required', 'max:50', Rule::unique('patients', 'nik')],
+            'nik' => ['required', 'max:50', Rule::unique('patients', 'nik')->ignore($patient->id)],
             'dokter' => ['required', 'max:50'],
-            'noRekMedis' => ['required', 'max:50', Rule::unique('patients', 'noRekMedis')],
+            'noRekMedis' => ['required', 'max:50', Rule::unique('patients', 'noRekMedis')->ignore($patient->id)],
             'pembayaran' => ['required'],
             'durasi' => ['required'],
         ]);

@@ -3,15 +3,45 @@
 @section('content')
 
 <div>
-    <div class="alert alert-secondary mx-4" role="alert">
-        <div class="ms-md-3 pe-md-3 d-flex align-items-center">
-            <form action="/antrian">
+    <div class="alert alert-secondary mx-4">
+        <div class="ms-md-3 pe-md-3 d-flex align-items-center justify-content-between">
+            <form action="/antrian" method="POST">
+                @csrf
+
                 <div class="input-group">
-                    <select class="form-select" name="pembayaran" style="padding-right: 40px;" name="filter">
-                        <option selected value="All">Semua</option>
-                        <option value="BPJS">BPJS</option>
-                        <option value="Asuransi">Asuransi</option>
-                        <option value="Umum">Umum</option>
+                    <select class="form-select" style="padding-right: 40px;" name="filter">
+                        <option 
+                            @if($selected === 'semua')
+                            selected
+                            @endif 
+                            value="semua"
+                        >
+                            Semua
+                        </option>
+                        <option 
+                            @if($selected === 'bpjs')
+                            selected
+                            @endif
+                            value="bpjs"
+                        >
+                            BPJS
+                        </option>
+                        <option 
+                            @if($selected === 'asuransi')
+                            selected
+                            @endif
+                            value="asuransi"
+                        >
+                            Asuransi
+                        </option>
+                        <option 
+                            @if($selected === 'umum')
+                            selected
+                            @endif
+                            value="umum"
+                        >
+                            Umum
+                        </option>
                     </select>
 
                     <button class="btn btn-info mb-0" type="submit">
@@ -20,6 +50,10 @@
                     </button>
                 </div>
             </form>
+
+            <span class="text-white text-uppercase fw-bolder">
+                total pasien: {{$patients->count()}}
+            </span>
         </div>
     </div>
 

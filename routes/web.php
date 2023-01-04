@@ -42,6 +42,7 @@ Route::group(['middleware' => 'auth'], function () {
 	)->name('billing');
 
 	Route::get('/antrian', [PatientController::class, 'index']);
+	Route::post('/antrian', [PatientController::class, 'filter']);
 	Route::delete('/antrian/{patient:id}', [PatientController::class, 'destroy']);
 
 	Route::get('/tambah-pasien', [PatientController::class, 'createAddPage']);

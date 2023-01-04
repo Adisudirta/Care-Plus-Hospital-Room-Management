@@ -103,9 +103,9 @@
 
                                 <div class="@error('pembayaran') border border-danger rounded-3 @enderror">
                                     <select class="form-select" name="pembayaran">
-                                        <option value="BPJS">BPJS</option>
-                                        <option value="Asuransi">Asuransi</option>
-                                        <option value="Umum">Umum</option>
+                                        <option value="bpjs">BPJS</option>
+                                        <option value="asuransi">Asuransi</option>
+                                        <option value="umum">Umum</option>
                                     </select>
 
                                     @error('pembayaran')
