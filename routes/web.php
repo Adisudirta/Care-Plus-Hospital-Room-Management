@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InfoAdminController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ResetController;
+use App\Http\Controllers\RoomController;
 use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\PatientController;
 use Illuminate\Http\Request;
@@ -52,17 +53,19 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('/antrian/{patient:id}', [PatientController::class, 'edit']);
 
 
-	Route::get(
-		'kamar',
-		function () {
-			return view('kamar');
-		}
-	)->name('kamar');
+	Route::get('/kamar', [RoomController::class, 'index']);
+
+	Route::get('/tambah-kamar', [RoomController::class, 'createAddPage']);
+	Route::post('/tambah-kamar', [RoomController::class, 'addRoom']);
+
+	Route::get('/kamar/{room:id}', [RoomController::class, 'createDetailPage']);
+	Route::post('/kamar/{room:id}', [RoomController::class, 'edit']);
+
+	Route::delete('/kamar/{room:id}', [RoomController::class, 'destroy']);
+
 
 	Route::get('/logout', [SessionsController::class, 'destroy']);
-
 	Route::get('/admin-profile', [InfoAdminController::class, 'create']);
-
 	Route::post('/admin-profile', [InfoAdminController::class, 'store']);
 
 	Route::get(

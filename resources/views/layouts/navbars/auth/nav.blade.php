@@ -7,6 +7,8 @@
                 <li class="breadcrumb-item text-sm text-dark active text-capitalize" aria-current="page">
                     @if(str_contains(Request::path(), 'antrian/'))
                     Detail Pasien
+                    @elseif(str_contains(Request::path(), 'kamar/'))
+                    Detail Kamar
                     @else
                     {{ str_replace('-', ' ', Request::path()) }}
                     @endif
@@ -15,6 +17,8 @@
             <h6 class="font-weight-bolder mb-0 text-capitalize">
                 @if(str_contains(Request::path(), 'antrian/'))
                 Detail Pasien
+                @elseif(str_contains(Request::path(), 'kamar/'))
+                Detail Kamar
                 @else
                 {{ str_replace('-', ' ', Request::path()) }}
                 @endif
