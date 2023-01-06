@@ -15,7 +15,6 @@ return new class extends Migration {
         Schema::create('rooms', function (Blueprint $table) {
             $table->id();
             $table->string('namaKamar')->unique();
-            $table->integer('jumlahPasien')->default(0);
             $table->integer('kapasitasMaximum');
             $table->enum('urgensi', ['icu', 'sicu', 'hdu', 'nicu', 'ccu', 'pacu']);
             $table->enum('kelas', ['kelas1', 'kelas2', 'kelas3']);

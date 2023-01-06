@@ -10,13 +10,7 @@ class PatientController extends Controller
 {
     public function index()
     {
-        $patients = Patient::all([
-            'id',
-            'nama',
-            'noRekMedis',
-            'pembayaran',
-            'durasi',
-        ]);
+        $patients = Patient::where('room_id', null)->get();
 
         return view('pasien/antrian', ['selected' => 'semua', 'patients' => $patients]);
     }

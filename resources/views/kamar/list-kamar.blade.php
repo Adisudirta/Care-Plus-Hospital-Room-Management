@@ -5,24 +5,32 @@
 <div>
     <div class="alert alert-secondary mx-4">
         <div class="ms-md-3 pe-md-3 d-flex align-items-center justify-content-between">
-            <form action="/list-kamar" method="POST">
+            <form action="/kamar" method="POST">
                 @csrf
 
                 <div class="input-group">
                     <select class="form-select" style="padding-right: 40px;" name="filter">
-                        <option 
+                        <option
+                            @if($selected === "semua") 
                             selected
+                            @endif
                             value="semua"
                         >
                             Semua
                         </option>
-                        <option 
-                            value="bpjs"
+                        <option
+                            @if($selected === "penuh") 
+                            selected
+                            @endif 
+                            value="penuh"
                         >
                             Penuh
                         </option>
-                        <option 
-                            value="asuransi"
+                        <option
+                            @if($selected === "dapatDiisi") 
+                            selected
+                            @endif  
+                            value="dapatDiisi"
                         >
                             Dapat Diisi
                         </option>
@@ -114,7 +122,7 @@
                                         <p class="text-xs font-weight-bold mb-0">{{ $room->namaKamar }}</p>
                                     </td>
                                     <td>
-                                        <p class="text-center text-xs font-weight-bold mb-0">{{ $room->jumlahPasien }} Pasien</p>
+                                        <p class="text-center text-xs font-weight-bold mb-0">{{ $room->patient->count() }} Pasien</p>
                                     </td>
                                     <td>
                                         <p class="text-center text-xs font-weight-bold mb-0">{{ $room->kapasitasMaximum }} Pasien</p>
@@ -154,7 +162,7 @@
                                     </td>                                
                                     <td class="text-center">
                                         <a href="/kamar/{{ $room->id }}" class="mx-3" data-bs-toggle="tooltip" data-bs-original-title="Tambahkan pasien ke kamar">
-                                            <i class="fas fa-user-edit text-secondary"></i>
+                                            <i class="fas fa fa-pencil-square-o text-secondary"></i>
                                         </a>
 
                                         <form action="/kamar/{{ $room->id }}" method="POST" class="d-inline">

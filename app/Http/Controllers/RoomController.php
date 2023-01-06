@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Patient;
 use App\Models\Room;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
@@ -17,6 +18,22 @@ class RoomController extends Controller
         return view('kamar/list-kamar', ['selected' => 'semua', 'rooms' => $rooms]);
     }
 
+    public function filter(Request $request)
+    {
+        if ($request->filter === 'semua') {
+            $selected = 'semua';
+            $rooms = Room::all();
+
+        } else if ($request->filter === 'dapatDiisi') {
+            $selected = 'dapatDiisi';
+            $rooms = Room::where('status', $request->filter)->get();
+        } else {
+            $selected = 'penuh';
+            $rooms = Room::where('status', $request->filter)->get();
+        }
+
+        return view('kamar/list-kamar', ['selected' => $selected, 'rooms' => $rooms]);
+    }
 
     public function createAddPage()
     {
@@ -45,7 +62,9 @@ class RoomController extends Controller
 
     public function createDetailPage(Room $room)
     {
-        return view('kamar/detail-kamar', ['room' => $room]);
+        $patients = Patient::where('room_id', $room->id)->get();
+
+        return view('kamar/detail-kamar', ['room' => $room, 'patients' => $patients]);
     }
 
     public function edit(Request $request, Room $room)

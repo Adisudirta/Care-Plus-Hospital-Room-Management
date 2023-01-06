@@ -17,4 +17,9 @@ class Patient extends Model
         'pembayaran',
         'durasi',
     ];
+
+    public function room()
+    {
+        return $this->belongsTo(Room::class);
+    }
 }

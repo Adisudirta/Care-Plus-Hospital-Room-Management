@@ -24,7 +24,7 @@
 
                         <div class="d-flex align-items-center">
                             <p class="mb-0 me-2 font-weight-bold text-sm">
-                                {{ $room->jumlahPasien }} / {{$room->kapasitasMaximum}}
+                                {{ $room->patient->count() }} / {{$room->kapasitasMaximum}}
                             </p>
                             
                             <span class="text-secondary text-xs font-weight-bold">
@@ -209,6 +209,102 @@
                         <button type="submit" class="btn bg-gradient-dark btn-md mt-4 mb-4">{{ 'Simpan' }}</button>
                     </div>
                 </form>
+            </div>
+        </div>   
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card mb-4 mx-4" style="min-height: 300px;">
+                <div class="card-header pb-0">
+                    <div class="d-flex flex-row justify-content-between">
+                        <div>
+                            <h5 class="mb-0">Pasien di Kamar Ini</h5>
+                        </div>
+
+                        <a href="/reservasi-pasien/{{$room->id}}" class="btn bg-gradient-primary btn-sm mb-0" type="button">+&nbsp; Pasien</a>
+                    </div>
+                </div>
+                <div class="card-body px-0 pt-0 pb-2">
+                    <div class="table-responsive p-0">
+                        <table class="table align-items-center mb-0">
+                            <thead>
+                                <tr>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                        Nama Pasien
+                                    </th>                    
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Durasi Rawat Inap
+                                    </th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Check In
+                                    </th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Check Out
+                                    </th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Pembayaran
+                                    </th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Action
+                                    </th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @isset($patients)
+                                @foreach($patients as $patient)
+                                <tr>
+                                    <td>
+                                        <p class="text-center text-xs font-weight-bold mb-0">{{ $patient->nama }}</p>
+                                    </td>                            
+                                    <td class="text-center">
+                                        <p class="text-xs font-weight-bold mb-0">{{ $patient->durasi }} Hari</p>
+                                    </td>
+                                    <td class="ps-4">
+                                        <p class="text-center text-xs font-weight-bold mb-0">{{ \Carbon\Carbon::parse($patient->checkIn)->format('d-m-Y') }}</p>
+                                    </td>
+                                    <td class="ps-4">
+                                        <p class="text-center text-xs font-weight-bold mb-0">{{ \Carbon\Carbon::parse($patient->checkOut)->format('d-m-Y') }}</p>
+                                    </td>
+                                    <td class="text-center">
+                                        <span class="text-secondary text-xs font-weight-bold">
+                                            @if($patient->pembayaran === 'BPJS')
+                                            <span class="badge badge-sm bg-gradient-success">
+                                                {{ $patient->pembayaran }}
+                                            </span>
+                                            @elseif($patient->pembayaran === 'Asuransi')
+                                            <span class="badge badge-sm bg-gradient-warning">
+                                                {{ $patient->pembayaran }}
+                                            </span>
+                                            @else
+                                            <span class="badge badge-sm bg-gradient-info">
+                                                {{ $patient->pembayaran }}
+                                            </span>
+                                            @endif
+                                        </span>
+                                    </td>
+                                    <td class="text-center">
+                                        <a href="/antrian/{{  $patient->id }}" class="mx-3" data-bs-toggle="tooltip" data-bs-original-title="Edit dan lihat detail pasien">
+                                            <i class="fas fa-user-edit text-secondary"></i>
+                                        </a>
+
+                                        <form action="/antrian/{{ $patient->id }}" method="POST" class="d-inline">
+                                            @method('delete')
+                                            @csrf
+
+                                            <button type="submit" data-bs-toggle="tooltip" data-bs-original-title="Hapus pasien" class="border-0 bg-transparent">
+                                                <i class="cursor-pointer fas fa-trash text-secondary"></i>    
+                                            </button>
+                                        </form>                        
+                                    </td>
+                                </tr>
+                                @endforeach
+                                @endisset
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

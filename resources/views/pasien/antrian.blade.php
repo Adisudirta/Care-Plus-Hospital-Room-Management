@@ -124,7 +124,7 @@
                                 @foreach($patients as $patient)
                                 <tr>
                                     <td class="ps-4">
-                                        <p class="text-center text-xs font-weight-bold mb-0">{{ $loop->index + 1 }}</p>
+                                        <p class="text-center text-xs font-weight-bold mb-0">{{ $patient->id }}</p>
                                     </td>
                                     <td>
                                         <p class="text-xs font-weight-bold mb-0">{{ $patient->nama }}</p>

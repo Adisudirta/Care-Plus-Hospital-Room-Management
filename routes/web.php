@@ -4,6 +4,7 @@ use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InfoAdminController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\ResetController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\SessionsController;
@@ -54,7 +55,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 
 	Route::get('/kamar', [RoomController::class, 'index']);
-
+	Route::post('/kamar', [RoomController::class, 'filter']);
 	Route::get('/tambah-kamar', [RoomController::class, 'createAddPage']);
 	Route::post('/tambah-kamar', [RoomController::class, 'addRoom']);
 
@@ -62,6 +63,9 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('/kamar/{room:id}', [RoomController::class, 'edit']);
 
 	Route::delete('/kamar/{room:id}', [RoomController::class, 'destroy']);
+
+	Route::get('/reservasi-pasien/{room:id}', [ReservationController::class, 'index']);
+	Route::post('/reservasi-pasien/{roomId}/{patientId}', [ReservationController::class, 'add']);
 
 
 	Route::get('/logout', [SessionsController::class, 'destroy']);

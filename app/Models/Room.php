@@ -15,4 +15,9 @@ class Room extends Model
         'urgensi',
         'kelas',
     ];
+
+    public function patient()
+    {
+        return $this->hasMany(Patient::class);
+    }
 }

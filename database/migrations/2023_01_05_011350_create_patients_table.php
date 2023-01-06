@@ -14,12 +14,15 @@ return new class extends Migration {
     {
         Schema::create('patients', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('room_id')->nullable()->references('id')->on('rooms');
             $table->string('nama');
             $table->string('nik')->unique();
             $table->string('dokter');
             $table->string('noRekMedis')->unique();
             $table->enum('pembayaran', ['BPJS', 'Asuransi', 'Umum']);
             $table->integer('durasi');
+            $table->timestamp('checkIn')->nullable();
+            $table->timestamp('checkOut')->nullable();
             $table->timestamps();
         });
     }

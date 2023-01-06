@@ -9,6 +9,8 @@
                     Detail Pasien
                     @elseif(str_contains(Request::path(), 'kamar/'))
                     Detail Kamar
+                    @elseif(str_contains(Request::path(), 'reservasi-pasien/'))
+                    Reservasi Pasien
                     @else
                     {{ str_replace('-', ' ', Request::path()) }}
                     @endif
@@ -19,6 +21,8 @@
                 Detail Pasien
                 @elseif(str_contains(Request::path(), 'kamar/'))
                 Detail Kamar
+                @elseif(str_contains(Request::path(), 'reservasi-pasien/'))
+                Reservasi Pasien
                 @else
                 {{ str_replace('-', ' ', Request::path()) }}
                 @endif
