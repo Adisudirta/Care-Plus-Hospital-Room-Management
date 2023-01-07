@@ -1,30 +1,31 @@
 <!-- Navbar -->
-<nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" navbar-scroll="true">
+<nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur"
+    navbar-scroll="true">
     <div class="container-fluid py-1 px-3">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
                 <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
                 <li class="breadcrumb-item text-sm text-dark active text-capitalize" aria-current="page">
-                    @if(str_contains(Request::path(), 'antrian/'))
-                    Detail Pasien
+                    @if (str_contains(Request::path(), 'antrian/'))
+                        Detail Pasien
                     @elseif(str_contains(Request::path(), 'kamar/'))
-                    Detail Kamar
+                        Detail Kamar
                     @elseif(str_contains(Request::path(), 'reservasi-pasien/'))
-                    Reservasi Pasien
+                        Reservasi Pasien
                     @else
-                    {{ str_replace('-', ' ', Request::path()) }}
+                        {{ str_replace('-', ' ', Request::path()) }}
                     @endif
                 </li>
             </ol>
             <h6 class="font-weight-bolder mb-0 text-capitalize">
-                @if(str_contains(Request::path(), 'antrian/'))
-                Detail Pasien
+                @if (str_contains(Request::path(), 'antrian/'))
+                    Detail Pasien
                 @elseif(str_contains(Request::path(), 'kamar/'))
-                Detail Kamar
+                    Detail Kamar
                 @elseif(str_contains(Request::path(), 'reservasi-pasien/'))
-                Reservasi Pasien
+                    Reservasi Pasien
                 @else
-                {{ str_replace('-', ' ', Request::path()) }}
+                    {{ str_replace('-', ' ', Request::path()) }}
                 @endif
             </h6>
         </nav>
@@ -32,7 +33,7 @@
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4 d-flex justify-content-end" id="navbar">
             <ul class="navbar-nav  justify-content-end">
                 <li class="nav-item d-flex align-items-center">
-                    <a href="{{ url('/logout')}}" class="nav-link text-body font-weight-bold px-0">
+                    <a href="{{ url('/logout') }}" class="nav-link text-body font-weight-bold px-0">
                         <i class="fa fa-user me-sm-1"></i>
                         <span class="d-sm-inline d-none">Sign Out</span>
                     </a>
