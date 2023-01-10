@@ -38,7 +38,7 @@ class ReservationController extends Controller
             $patient->checkOut = date('Y-m-d H:i:s', strtotime(sprintf('+%s day', $patient->durasi)));
             $patient->save();
 
-            if ($room->patient->count() === $room->kapasitasMaximum) {
+            if ($room->kapasitasMaximum === 1) {
                 $room->status = 'penuh';
                 $room->save();
             }
